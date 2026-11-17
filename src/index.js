@@ -3,7 +3,7 @@ import "./styles.css";
 let city = "";
 let state = "";
 let weatherData;
-const currentWeatherDataArray = [];
+let currentWeatherData;
 const nextWeekWeatherDataArray = [];
 
 const locationForm = document.querySelector(".location-input");
@@ -32,24 +32,43 @@ async function getWeather() {
         weatherData = await response.json();
         console.log(weatherData);
         extractCurrentWeatherData();
-        console.log(currentWeatherDataArray)
+        getNextWeeksWeather()
+        console.log(currentWeatherData);
+        console.log(currentWeatherData.currentConditions);
     } catch (error) {
-        console.error(error);
+        alert("You must enter a location.");
     }
 }
 
 //Need to pull in data for following week, potentially in their own arrays. Might need to make a Class for following week's weather info to get the same data pulled into an object for each day.
 function extractCurrentWeatherData() {
-    currentWeatherDataArray.push(
-        {currentConditions: weatherData.currentConditions.conditions},
-        {currentFeelsLike: weatherData.currentConditions.feelslike},
-        {currentHumidity: weatherData.currentConditions.humidity},
-        {currentTemp: weatherData.currentConditions.temp},
-        {currentPrecipProb: weatherData.currentConditions.precipprob},
-        {currentWindSpeed: weatherData.currentConditions.windspeed},
-    );
+    currentWeatherData = {
+        currentConditions: weatherData.currentConditions.conditions,
+        currentFeelsLike: weatherData.currentConditions.feelslike,
+        currentHumidity: weatherData.currentConditions.humidity,
+        currentTemp: weatherData.currentConditions.temp,
+        currentPrecipProb: weatherData.currentConditions.precipprob,
+        currentWindSpeed: weatherData.currentConditions.windspeed,
+        currentMaxTemp: weatherData.days[0].tempmax,
+        currentMinTemp: weatherData.days[0].tempmin,
+    };
 }
 
-// class Day {
-//     constructor(conditions, feelsLike, humidity, precipitation, precipitationProbability, temperature, minTemperature, maxTemperature, )
-// }
+class Day {
+    constructor(date, conditions, precipProb, tempMin, tempMax) {
+        this.date = date;
+        this.conditions = conditions;
+        this.precipProb = precipProb;
+        this.tempMin - tempMin;
+        this.tempMax = tempMax;
+    }
+}
+
+function getNextWeeksWeather() {
+    const nextWeek = weatherData.days.slice(1);
+    console.log(nextWeek);
+    nextWeek.forEach(day => {
+        nextWeekWeatherDataArray.push(new Day(day.datetime, day.conditions, day.precipprob, day.tempmin, day.tempmax));
+    })
+    console.log(nextWeekWeatherDataArray);
+};
