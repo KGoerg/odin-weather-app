@@ -4,7 +4,7 @@ let city = "";
 let state = "";
 let weatherData;
 let currentWeatherData;
-const nextWeekWeatherDataArray = [];
+let nextWeekWeatherDataArray = [];
 
 const locationForm = document.querySelector(".location-input");
 const locationInput = document.querySelector('input[type="text"]');
@@ -31,6 +31,7 @@ async function getWeather() {
         const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}%2C%20${state}?unitGroup=us&contentType=json`);
         weatherData = await response.json();
         console.log(weatherData);
+        emptyNextWeeksWeatherArray();
         extractCurrentWeatherData();
         getNextWeeksWeather()
         console.log(currentWeatherData);
@@ -66,9 +67,12 @@ class Day {
 
 function getNextWeeksWeather() {
     const nextWeek = weatherData.days.slice(1);
-    console.log(nextWeek);
     nextWeek.forEach(day => {
         nextWeekWeatherDataArray.push(new Day(day.datetime, day.conditions, day.precipprob, day.tempmin, day.tempmax));
     })
     console.log(nextWeekWeatherDataArray);
+};
+
+function emptyNextWeeksWeatherArray() {
+    nextWeekWeatherDataArray = [];
 };
