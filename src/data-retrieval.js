@@ -1,6 +1,6 @@
 let city = "";
 let state = "";
-let weatherData;
+export let weatherData;
 let currentWeatherData;
 let nextWeekWeatherDataArray = [];
 
@@ -16,6 +16,20 @@ export function getLocation() {
     console.log(`City = ${city} and State = ${state}`);
 }
 
+export async function getDefaultWeather() {
+    try {
+        const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/NewYork%2C%20NY?unitGroup=us&contentType=json`);
+        weatherData = await response.json();
+        console.log(weatherData);
+        extractCurrentWeatherData();
+        getNextWeeksWeather()
+        console.log(currentWeatherData);
+        console.log(currentWeatherData.currentConditions);
+    } catch (error) {
+        alert(error);
+    }
+}
+
 export async function getWeather() {
     try {
         const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}%2C%20${state}?unitGroup=us&contentType=json`);
@@ -27,7 +41,7 @@ export async function getWeather() {
         console.log(currentWeatherData);
         console.log(currentWeatherData.currentConditions);
     } catch (error) {
-        alert("You must enter a location.");
+        alert(error);
     }
 }
 
