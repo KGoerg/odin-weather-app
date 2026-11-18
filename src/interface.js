@@ -1,8 +1,46 @@
 import { weatherData } from "./data-retrieval.js";
 
+//Weather Card Container
 const weatherContainer = document.querySelector(".weather-card");
+weatherContainer.classList.add("weather-card", "container");
+
+//Location Header
 const weatherCardLocation = document.createElement("h1");
-weatherContainer.appendChild(weatherCardLocation);
+
+//Current Day's Weather Info
+const currentDayContainer = document.createElement("div");
+currentDayContainer.classList.add("current-day", "container");
+
+const currentDayTemp = document.createElement("h2");
+
+const moreCurrentTempInfoContainer = document.createElement("div");
+moreCurrentTempInfoContainer.classList.add("more-current-temp", "container");
+const feelsLike = document.createElement("p");
+const currentDayHigh = document.createElement("p");
+const currentDayLow = document.createElement("p");
+
+const additionalWeatherConditionsContainer = document.createElement("div");
+additionalWeatherConditionsContainer.classList.add("weather-conditions", "container");
+const currentDayRainChance = document.createElement("p");
+const currentDayHumidity = document.createElement("p");
+const currentDayWindSpeed = document.createElement("p");
+
+const currentDayIconContainer = document.createElement("div");
+currentDayIconContainer.classList.add("current-day-icon-container", "container");
+const currentDayIcon = document.createElement("img");
+const currentDayCondition = document.createElement("p");
+
+//Appends
+weatherContainer.append(weatherCardLocation, currentDayContainer);
+
+currentDayContainer.append(currentDayTemp, moreCurrentTempInfoContainer, additionalWeatherConditionsContainer, currentDayIconContainer);
+
+moreCurrentTempInfoContainer.append(feelsLike, currentDayHigh, currentDayLow);
+
+additionalWeatherConditionsContainer.append(currentDayRainChance, currentDayHumidity, currentDayWindSpeed);
+
+currentDayIconContainer.append(currentDayIcon, currentDayCondition);
+
 
 export function populateWeatherInfo() {
     weatherCardLocation.textContent = weatherData.resolvedAddress;
