@@ -68,13 +68,13 @@ class Day {
         this.date = date;
         this.conditions = conditions;
         this.precipProb = precipProb;
-        this.tempMin - tempMin;
+        this.tempMin = tempMin;
         this.tempMax = tempMax;
     }
 }
 
 function getNextWeeksWeather() {
-    const nextWeek = weatherData.days.slice(1);
+    const nextWeek = weatherData.days;
     nextWeek.forEach(day => {
         nextWeekWeatherDataArray.push(new Day(day.datetime, day.conditions, day.precipprob, day.tempmin, day.tempmax));
     })
