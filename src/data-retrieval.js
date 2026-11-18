@@ -1,7 +1,7 @@
 let city = "";
 let state = "";
 export let weatherData;
-let currentWeatherData;
+let currentDayData;
 let nextWeekWeatherDataArray = [];
 
 export const locationForm = document.querySelector(".location-input");
@@ -21,10 +21,10 @@ export async function getDefaultWeather() {
         const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/NewYork%2C%20NY?unitGroup=us&contentType=json`);
         weatherData = await response.json();
         console.log(weatherData);
-        extractCurrentWeatherData();
+        extractcurrentDayData();
         getNextWeeksWeather()
-        console.log(currentWeatherData);
-        console.log(currentWeatherData.currentConditions);
+        console.log(currentDayData);
+        console.log(currentDayData.currentConditions);
     } catch (error) {
         alert(error);
     }
@@ -36,18 +36,18 @@ export async function getWeather() {
         weatherData = await response.json();
         console.log(weatherData);
         emptyNextWeeksWeatherArray();
-        extractCurrentWeatherData();
+        extractcurrentDayData();
         getNextWeeksWeather()
-        console.log(currentWeatherData);
-        console.log(currentWeatherData.currentConditions);
+        console.log(currentDayData);
+        console.log(currentDayData.currentConditions);
     } catch (error) {
         alert(error);
     }
 }
 
 //Need to pull in data for following week, potentially in their own arrays. Might need to make a Class for following week's weather info to get the same data pulled into an object for each day.
-function extractCurrentWeatherData() {
-    currentWeatherData = {
+function extractcurrentDayData() {
+    currentDayData = {
         currentConditions: weatherData.currentConditions.conditions,
         currentFeelsLike: weatherData.currentConditions.feelslike,
         currentHumidity: weatherData.currentConditions.humidity,
@@ -56,6 +56,7 @@ function extractCurrentWeatherData() {
         currentWindSpeed: weatherData.currentConditions.windspeed,
         currentMaxTemp: weatherData.days[0].tempmax,
         currentMinTemp: weatherData.days[0].tempmin,
+        currentAddress: weatherData.resolvedAddress,
     };
 }
 
