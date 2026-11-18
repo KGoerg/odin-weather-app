@@ -4,6 +4,6 @@ const weatherContainer = document.querySelector(".weather-card");
 const weatherCardLocation = document.createElement("h1");
 weatherContainer.appendChild(weatherCardLocation);
 
-export function generateInterface() {
+export function populateWeatherInfo() {
     weatherCardLocation.textContent = weatherData.resolvedAddress;
 }
