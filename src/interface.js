@@ -30,8 +30,12 @@ currentDayIconContainer.classList.add("current-day-icon-container", "container")
 const currentDayIcon = document.createElement("img");
 const currentDayCondition = document.createElement("p");
 
+//Next Week's Weather Info
+const nextWeekWeatherContainer = document.createElement("div");
+nextWeekWeatherContainer.classList.add("next-week-weather", "container");
+
 //Appends
-weatherContainer.append(weatherCardLocation, currentDayContainer);
+weatherContainer.append(weatherCardLocation, currentDayContainer, nextWeekWeatherContainer);
 
 currentDayContainer.append(currentDayTemp, moreCurrentTempInfoContainer, additionalWeatherConditionsContainer, currentDayIconContainer);
 
@@ -51,4 +55,19 @@ export function populateWeatherInfo() {
     currentDayHumidity.textContent = `Humidity: ${currentDayData.currentHumidity}%`;
     currentDayWindSpeed.textContent = `Wind Speed: ${currentDayData.currentWindSpeed}`;
     currentDayCondition.textContent = currentDayData.currentConditions;
+
+    nextWeekWeatherDataArray.forEach(day => {
+        const dayContainer = document.createElement("div");
+        dayContainer.classList.add("day-container", "container");
+        nextWeekWeatherContainer.appendChild(dayContainer);
+        const dayName = document.createElement("p");
+        dayName.textContent = day.date;
+        const dayIcon = document.createElement("img");
+        const maxTemp = document.createElement("p");
+        maxTemp.textContent = day.tempMax;
+        const minTemp = document.createElement("p");
+        minTemp.textContent = day.tempMin;
+
+        dayContainer.append(dayName, dayIcon, maxTemp, minTemp);
+    })
 }
