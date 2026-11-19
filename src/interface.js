@@ -1,4 +1,4 @@
-import { weatherData } from "./data-retrieval.js";
+import { weatherData, currentDayData, nextWeekWeatherDataArray } from "./data-retrieval.js";
 
 //Weather Card Container
 const weatherContainer = document.querySelector(".weather-card");
@@ -41,7 +41,14 @@ additionalWeatherConditionsContainer.append(currentDayRainChance, currentDayHumi
 
 currentDayIconContainer.append(currentDayIcon, currentDayCondition);
 
-
 export function populateWeatherInfo() {
     weatherCardLocation.textContent = weatherData.resolvedAddress;
+    currentDayTemp.textContent = `${currentDayData.currentTemp}`;
+    feelsLike.textContent = `Feels Like: ${currentDayData.currentFeelsLike}`;
+    currentDayHigh.textContent = `High: ${currentDayData.currentMaxTemp}`;
+    currentDayLow.textContent = `Low: ${currentDayData.currentMinTemp}`;
+    currentDayRainChance.textContent = `Chance of Rain: ${currentDayData.currentPrecipProb}%`;
+    currentDayHumidity.textContent = `Humidity: ${currentDayData.currentHumidity}%`;
+    currentDayWindSpeed.textContent = `Wind Speed: ${currentDayData.currentWindSpeed}`;
+    currentDayCondition.textContent = currentDayData.currentConditions;
 }
