@@ -3,8 +3,8 @@ import { populateWeatherInfo } from "./interface.js";
 let city = "";
 let state = "";
 export let weatherData;
-let currentDayData;
-let nextWeekWeatherDataArray = [];
+export let currentDayData;
+export let nextWeekWeatherDataArray = [];
 
 export const locationForm = document.querySelector(".location-input");
 export const locationInput = document.querySelector('input[type="text"]');
