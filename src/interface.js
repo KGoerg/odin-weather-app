@@ -47,7 +47,7 @@ currentDayIconContainer.append(currentDayIcon, currentDayCondition);
 
 export function populateWeatherInfo() {
     weatherCardLocation.textContent = weatherData.resolvedAddress;
-    currentDayTemp.textContent = `${currentDayData.currentTemp}`;
+    currentDayTemp.textContent = `${currentDayData.currentTemp}°`;
     feelsLike.textContent = `Feels Like: ${currentDayData.currentFeelsLike}°`;
     currentDayHigh.textContent = `High: ${currentDayData.currentMaxTemp}°`;
     currentDayLow.textContent = `Low: ${currentDayData.currentMinTemp}°`;
