@@ -1,7 +1,6 @@
 import { populateWeatherInfo } from "./interface.js";
 
-let city = "";
-let state = "";
+let location = "";
 export let weatherData;
 export let currentDayData;
 export let nextWeekWeatherDataArray = [];
@@ -10,12 +9,8 @@ export const locationForm = document.querySelector(".location-input");
 export const locationInput = document.querySelector('input[type="text"]');
 
 export function getLocation() {
-    let location = "";
-    location = locationInput.value.replaceAll(",", "").split(" ");
+    location = locationInput.value.replaceAll(",", "");
     console.log(location);
-    city = location[0];
-    state = location[1];
-    console.log(`City = ${city} and State = ${state}`);
 }
 
 export async function getDefaultWeather() {
@@ -34,7 +29,7 @@ export async function getDefaultWeather() {
 
 export async function getWeather() {
     try {
-        const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}%2C%20${state}?unitGroup=us&contentType=json`);
+        const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=us&elements=add%3AresolvedAddress&contentType=json`);
         weatherData = await response.json();
         console.log(weatherData);
         emptyNextWeeksWeatherArray();
@@ -48,7 +43,6 @@ export async function getWeather() {
     }
 }
 
-//Need to pull in data for following week, potentially in their own arrays. Might need to make a Class for following week's weather info to get the same data pulled into an object for each day.
 function extractCurrentDayData() {
     currentDayData = {
         currentConditions: weatherData.currentConditions.conditions,
