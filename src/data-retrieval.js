@@ -47,12 +47,12 @@ function extractCurrentDayData() {
     currentDayData = {
         currentConditions: weatherData.currentConditions.conditions,
         currentFeelsLike: weatherData.currentConditions.feelslike,
-        currentHumidity: weatherData.currentConditions.humidity,
-        currentTemp: weatherData.currentConditions.temp,
+        currentHumidity: Math.round(weatherData.currentConditions.humidity),
+        currentTemp: Math.round(weatherData.currentConditions.temp),
         currentPrecipProb: weatherData.currentConditions.precipprob,
-        currentWindSpeed: weatherData.currentConditions.windspeed,
-        currentMaxTemp: weatherData.days[0].tempmax,
-        currentMinTemp: weatherData.days[0].tempmin,
+        currentWindSpeed: Math.round(weatherData.currentConditions.windspeed),
+        currentMaxTemp: Math.round(weatherData.days[0].tempmax),
+        currentMinTemp: Math.round(weatherData.days[0].tempmin),
         currentAddress: weatherData.resolvedAddress,
     };
 }
@@ -61,9 +61,9 @@ class Day {
     constructor(date, conditions, precipProb, tempMin, tempMax) {
         this.date = date;
         this.conditions = conditions;
-        this.precipProb = precipProb;
-        this.tempMin = tempMin;
-        this.tempMax = tempMax;
+        this.precipProb = Math.round(precipProb);
+        this.tempMin = Math.round(tempMin);
+        this.tempMax = Math.round(tempMax);
     }
 }
 
