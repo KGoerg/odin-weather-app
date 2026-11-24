@@ -81,7 +81,7 @@ const toKPH = (mph) => Math.round((mph *1.609344));
 const tempConvertButton = document.querySelector(".temp-convert");
 let isFahrenheit = true;
 
-function convertCurrentDayValues() {
+export function convertCurrentDayValues() {
     if (isFahrenheit === false) {
         currentDayTemp.textContent = `${toCelsius(currentDayData.currentTemp)}°C`;
         feelsLike.textContent = `Feels Like: ${toCelsius(currentDayData.currentFeelsLike)}°C`;
