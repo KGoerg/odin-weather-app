@@ -19,7 +19,7 @@ export async function getDefaultWeather() {
         weatherData = await response.json();
         console.log(weatherData);
         extractCurrentDayData();
-        getNextWeeksWeather()
+        getNextWeeksWeatherData()
         console.log(currentDayData);
         console.log(currentDayData.currentConditions);
     } catch (error) {
@@ -34,7 +34,7 @@ export async function getWeather() {
         console.log(weatherData);
         emptyNextWeeksWeatherArray();
         extractCurrentDayData();
-        getNextWeeksWeather();
+        getNextWeeksWeatherData();
         populateWeatherInfo();
         console.log(currentDayData);
         console.log(currentDayData.currentConditions);
@@ -67,7 +67,7 @@ class Day {
     }
 }
 
-function getNextWeeksWeather() {
+function getNextWeeksWeatherData() {
     const nextWeek = weatherData.days;
     nextWeek.forEach(day => {
         nextWeekWeatherDataArray.push(new Day(day.datetime, day.conditions, day.precipprob, day.tempmin, day.tempmax));
