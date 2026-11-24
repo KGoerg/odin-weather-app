@@ -53,7 +53,7 @@ export function populateWeatherInfo() {
     currentDayLow.textContent = `Low: ${currentDayData.currentMinTemp}°`;
     currentDayRainChance.textContent = `Chance of Rain: ${currentDayData.currentPrecipProb}%`;
     currentDayHumidity.textContent = `Humidity: ${currentDayData.currentHumidity}%`;
-    currentDayWindSpeed.textContent = `Wind Speed: ${currentDayData.currentWindSpeed}`;
+    currentDayWindSpeed.textContent = `Wind Speed: ${currentDayData.currentWindSpeed} mph`;
     currentDayCondition.textContent = currentDayData.currentConditions;
 
     nextWeekWeatherContainer.replaceChildren();
@@ -76,38 +76,40 @@ export function populateWeatherInfo() {
 
 const toCelsius = (fahrenheit) => Math.round((fahrenheit - 32) * 5 / 9);
 
+const toKPH = (mph) => Math.round((mph *1.609344));
+
 const tempConvertButton = document.querySelector(".temp-convert");
 let isFahrenheit = true;
 
-function convertCurrentDayTemps() {
+function convertCurrentDayValues() {
     if (isFahrenheit === false) {
         currentDayTemp.textContent = `${toCelsius(currentDayData.currentTemp)}°`;
         feelsLike.textContent = `Feels Like: ${toCelsius(currentDayData.currentFeelsLike)}°`;
         currentDayHigh.textContent = `High: ${toCelsius(currentDayData.currentMaxTemp)}°`;
         currentDayLow.textContent = `Low: ${toCelsius(currentDayData.currentMinTemp)}°`;
+        currentDayWindSpeed.textContent = `Wind Speed: ${toKPH(currentDayData.currentWindSpeed)} kph`;
     } else {
         currentDayTemp.textContent = `${currentDayData.currentTemp}°`;
         feelsLike.textContent = `Feels Like: ${currentDayData.currentFeelsLike}°`;
         currentDayHigh.textContent = `High: ${currentDayData.currentMaxTemp}°`;
         currentDayLow.textContent = `Low: ${currentDayData.currentMinTemp}°`;
+        currentDayWindSpeed.textContent = `Wind Speed: ${currentDayData.currentWindSpeed} mph`;
     }
 };
 
-// function convertNextWeekTemps() {
-//     nextWeekWeatherDataArray.forEach(day => {
-//         let celsiusMax = toCelsius(day.tempMax);
-//         let fahrenheitMax = day.tempMax;
-//         let celsiusMin = toCelsius(day.tempMin);
-//         let fahrenheitMin = day.tempMin;
-//         if (isFahrenheit === false) {
-//             maxTemp.textContent = celsiusMax;
-//             minTemp.textContent = celsiusMin;
-//         }
-//     })
-// }
+function convertNextWeekTemps() {
+    nextWeekWeatherDataArray.forEach(day => {
+        let celsiusMax = toCelsius(day.tempMax);
+        let celsiusMin = toCelsius(day.tempMin);
+        if (isFahrenheit === false) {
+            maxTemp.textContent = celsiusMax;
+            minTemp.textContent = celsiusMin;
+        }
+    })
+}
 
 tempConvertButton.addEventListener("click", () => {
     isFahrenheit = !isFahrenheit;
-    convertCurrentDayTemps();
+    convertCurrentDayValues();
     // convertNextWeekTemps();
 });
