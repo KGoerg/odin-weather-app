@@ -73,3 +73,41 @@ export function populateWeatherInfo() {
         dayContainer.append(dayName, dayIcon, maxTemp, minTemp);
     })
 }
+
+const toCelsius = (fahrenheit) => Math.round((fahrenheit - 32) * 5 / 9);
+
+const tempConvertButton = document.querySelector(".temp-convert");
+let isFahrenheit = true;
+
+function convertCurrentDayTemps() {
+    if (isFahrenheit === false) {
+        currentDayTemp.textContent = `${toCelsius(currentDayData.currentTemp)}°`;
+        feelsLike.textContent = `Feels Like: ${toCelsius(currentDayData.currentFeelsLike)}°`;
+        currentDayHigh.textContent = `High: ${toCelsius(currentDayData.currentMaxTemp)}°`;
+        currentDayLow.textContent = `Low: ${toCelsius(currentDayData.currentMinTemp)}°`;
+    } else {
+        currentDayTemp.textContent = `${currentDayData.currentTemp}°`;
+        feelsLike.textContent = `Feels Like: ${currentDayData.currentFeelsLike}°`;
+        currentDayHigh.textContent = `High: ${currentDayData.currentMaxTemp}°`;
+        currentDayLow.textContent = `Low: ${currentDayData.currentMinTemp}°`;
+    }
+};
+
+// function convertNextWeekTemps() {
+//     nextWeekWeatherDataArray.forEach(day => {
+//         let celsiusMax = toCelsius(day.tempMax);
+//         let fahrenheitMax = day.tempMax;
+//         let celsiusMin = toCelsius(day.tempMin);
+//         let fahrenheitMin = day.tempMin;
+//         if (isFahrenheit === false) {
+//             maxTemp.textContent = celsiusMax;
+//             minTemp.textContent = celsiusMin;
+//         }
+//     })
+// }
+
+tempConvertButton.addEventListener("click", () => {
+    isFahrenheit = !isFahrenheit;
+    convertCurrentDayTemps();
+    // convertNextWeekTemps();
+});
