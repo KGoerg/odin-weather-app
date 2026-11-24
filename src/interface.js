@@ -47,10 +47,10 @@ currentDayIconContainer.append(currentDayIcon, currentDayCondition);
 
 export function populateWeatherInfo() {
     weatherCardLocation.textContent = weatherData.resolvedAddress;
-    currentDayTemp.textContent = `${currentDayData.currentTemp}°`;
-    feelsLike.textContent = `Feels Like: ${currentDayData.currentFeelsLike}°`;
-    currentDayHigh.textContent = `High: ${currentDayData.currentMaxTemp}°`;
-    currentDayLow.textContent = `Low: ${currentDayData.currentMinTemp}°`;
+    currentDayTemp.textContent = `${currentDayData.currentTemp}°F`;
+    feelsLike.textContent = `Feels Like: ${currentDayData.currentFeelsLike}°F`;
+    currentDayHigh.textContent = `High: ${currentDayData.currentMaxTemp}°F`;
+    currentDayLow.textContent = `Low: ${currentDayData.currentMinTemp}°F`;
     currentDayRainChance.textContent = `Chance of Rain: ${currentDayData.currentPrecipProb}%`;
     currentDayHumidity.textContent = `Humidity: ${currentDayData.currentHumidity}%`;
     currentDayWindSpeed.textContent = `Wind Speed: ${currentDayData.currentWindSpeed} mph`;
@@ -83,16 +83,16 @@ let isFahrenheit = true;
 
 function convertCurrentDayValues() {
     if (isFahrenheit === false) {
-        currentDayTemp.textContent = `${toCelsius(currentDayData.currentTemp)}°`;
-        feelsLike.textContent = `Feels Like: ${toCelsius(currentDayData.currentFeelsLike)}°`;
-        currentDayHigh.textContent = `High: ${toCelsius(currentDayData.currentMaxTemp)}°`;
-        currentDayLow.textContent = `Low: ${toCelsius(currentDayData.currentMinTemp)}°`;
+        currentDayTemp.textContent = `${toCelsius(currentDayData.currentTemp)}°C`;
+        feelsLike.textContent = `Feels Like: ${toCelsius(currentDayData.currentFeelsLike)}°C`;
+        currentDayHigh.textContent = `High: ${toCelsius(currentDayData.currentMaxTemp)}°C`;
+        currentDayLow.textContent = `Low: ${toCelsius(currentDayData.currentMinTemp)}°C`;
         currentDayWindSpeed.textContent = `Wind Speed: ${toKPH(currentDayData.currentWindSpeed)} kph`;
     } else {
-        currentDayTemp.textContent = `${currentDayData.currentTemp}°`;
-        feelsLike.textContent = `Feels Like: ${currentDayData.currentFeelsLike}°`;
-        currentDayHigh.textContent = `High: ${currentDayData.currentMaxTemp}°`;
-        currentDayLow.textContent = `Low: ${currentDayData.currentMinTemp}°`;
+        currentDayTemp.textContent = `${currentDayData.currentTemp}°F`;
+        feelsLike.textContent = `Feels Like: ${currentDayData.currentFeelsLike}°F`;
+        currentDayHigh.textContent = `High: ${currentDayData.currentMaxTemp}°F`;
+        currentDayLow.textContent = `Low: ${currentDayData.currentMinTemp}°F`;
         currentDayWindSpeed.textContent = `Wind Speed: ${currentDayData.currentWindSpeed} mph`;
     }
 };
