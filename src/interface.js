@@ -45,6 +45,14 @@ additionalWeatherConditionsContainer.append(currentDayRainChance, currentDayHumi
 
 currentDayIconContainer.append(currentDayIcon, currentDayCondition);
 
+//Populate Weather
+const toCelsius = (fahrenheit) => Math.round((fahrenheit - 32) * 5 / 9);
+
+const toKPH = (mph) => Math.round((mph *1.609344));
+
+const tempConvertButton = document.querySelector(".temp-convert");
+let isFahrenheit = true;
+
 export function populateWeatherInfo() {
     weatherCardLocation.textContent = weatherData.resolvedAddress;
     currentDayTemp.textContent = `${currentDayData.currentTemp}°F`;
@@ -74,13 +82,6 @@ export function populateWeatherInfo() {
     })
 }
 
-const toCelsius = (fahrenheit) => Math.round((fahrenheit - 32) * 5 / 9);
-
-const toKPH = (mph) => Math.round((mph *1.609344));
-
-const tempConvertButton = document.querySelector(".temp-convert");
-let isFahrenheit = true;
-
 export function convertCurrentDayValues() {
     if (isFahrenheit === false) {
         currentDayTemp.textContent = `${toCelsius(currentDayData.currentTemp)}°C`;
@@ -97,19 +98,31 @@ export function convertCurrentDayValues() {
     }
 };
 
-function convertNextWeekTemps() {
+export function convertNextWeekTemps() {
+    nextWeekWeatherContainer.replaceChildren();
+
     nextWeekWeatherDataArray.forEach(day => {
-        let celsiusMax = toCelsius(day.tempMax);
-        let celsiusMin = toCelsius(day.tempMin);
+        const dayContainer = document.createElement("div");
+        dayContainer.classList.add("day-container", "container");
+        nextWeekWeatherContainer.appendChild(dayContainer);
+        const dayName = document.createElement("p");
+        const dayIcon = document.createElement("img");
+        const maxTemp = document.createElement("p");
+        const minTemp = document.createElement("p");
+        dayName.textContent = day.date;
         if (isFahrenheit === false) {
-            maxTemp.textContent = celsiusMax;
-            minTemp.textContent = celsiusMin;
+            maxTemp.textContent = `${toCelsius(day.tempMax)}°C`;
+            minTemp.textContent = `${toCelsius(day.tempMin)}°C`;
+        } else {
+            maxTemp.textContent = `${day.tempMax}°`;
+            minTemp.textContent = `${day.tempMin}°`;
         }
-    })
-}
+        
+        dayContainer.append(dayName, dayIcon, maxTemp, minTemp);
+    })};
 
 tempConvertButton.addEventListener("click", () => {
     isFahrenheit = !isFahrenheit;
     convertCurrentDayValues();
-    // convertNextWeekTemps();
+    convertNextWeekTemps();
 });

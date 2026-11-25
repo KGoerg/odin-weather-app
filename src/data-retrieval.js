@@ -1,4 +1,4 @@
-import { populateWeatherInfo, convertCurrentDayValues} from "./interface.js";
+import { populateWeatherInfo, convertCurrentDayValues, convertNextWeekTemps} from "./interface.js";
 
 let location = "";
 export let weatherData;
@@ -37,6 +37,7 @@ export async function getWeather() {
         getNextWeeksWeatherData();
         populateWeatherInfo();
         convertCurrentDayValues();
+        convertNextWeekTemps();
         console.log(currentDayData);
         console.log(currentDayData.currentConditions);
     } catch (error) {
