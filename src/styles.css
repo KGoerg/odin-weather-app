@@ -61,11 +61,15 @@ h1, h2, h3, h4, h5, h6 {
     border: 2px solid red;
     display: flex;
     flex-direction: column;
-}
+  }
 
 .weather-card h1 {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-size: 2rem;
+    flex: 1 1 1;
 }
 
 .current-day {
@@ -74,6 +78,7 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 1fr 1fr;
     justify-content: space-evenly;
+    flex: 0 1 0;
 }
 
 .more-current-temp, .weather-conditions {
@@ -102,4 +107,23 @@ h1, h2, h3, h4, h5, h6 {
 .current-day-icon-container p {
     justify-self: center;
     align-self: center;
+}
+
+.next-week-weather {
+  display: flex;
+  align-items: stretch;
+  flex: 1 1 0;
+  justify-content: space-evenly;
+}
+
+.day-container {
+  flex-basis: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.temps-container {
+  display: flex;
+  gap: 15px;
 }
