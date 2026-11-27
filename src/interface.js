@@ -1,4 +1,5 @@
 import { weatherData, currentDayData, nextWeekWeatherDataArray } from "./data-retrieval.js";
+import { format, parseISO } from "date-fns";
 
 //Weather Card Container
 const weatherContainer = document.querySelector(".weather-card");
@@ -71,14 +72,21 @@ export function populateWeatherInfo() {
         dayContainer.classList.add("day-container", "container");
         nextWeekWeatherContainer.appendChild(dayContainer);
         const dayName = document.createElement("p");
-        dayName.textContent = day.date;
+        const dateLabel = document.createElement("p");
+        const date = day.date;
+        const isoDate = parseISO(date);
+        dayName.textContent = format (new Date(isoDate), "eee");
+        dateLabel.textContent = format (new Date (isoDate), "MMM d");
+        const tempsContainer = document.createElement("div");
+        tempsContainer.classList.add("temps-container", "container");
         const dayIcon = document.createElement("img");
         const maxTemp = document.createElement("p");
-        maxTemp.textContent = `${day.tempMax}°`;
+        maxTemp.textContent = `${day.tempMax}°F`;
         const minTemp = document.createElement("p");
-        minTemp.textContent = `${day.tempMin}°`;
+        minTemp.textContent = `${day.tempMin}°F`;
 
-        dayContainer.append(dayName, dayIcon, maxTemp, minTemp);
+        tempsContainer.append(maxTemp, minTemp);
+        dayContainer.append(dayName, dateLabel, dayIcon, tempsContainer);
     })
 }
 
